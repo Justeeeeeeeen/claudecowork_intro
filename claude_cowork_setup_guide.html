@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started with Claude Cowork</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f0f2f5;
+    color: #1a2035;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .header {
+    background: #1a2035;
+    color: white;
+    padding: 28px 40px;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8a93a6;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: #8a93a6;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  .intro-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border-left: 4px solid #EE4D2D;
+  }
+  .intro-card p {
+    font-size: 13px;
+    color: #3a4257;
+    line-height: 1.7;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #8a93a6;
+    margin-bottom: 14px;
+  }
+
+  .tools-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .tool-card {
+    background: white;
+    border-radius: 8px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    border: 1px solid #e4e8f0;
+  }
+
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .icon-blue   { background: #e8f0fe; }
+  .icon-green  { background: #e8f5e9; }
+  .icon-purple { background: #f3e8fd; }
+  .icon-orange { background: #fff3e0; }
+
+  .tool-body { flex: 1; }
+
+  .tool-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a2035;
+    margin-bottom: 4px;
+  }
+
+  .tool-desc {
+    font-size: 13px;
+    color: #5a6478;
+    margin-bottom: 10px;
+  }
+
+  .tool-action {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1a2035;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 5px;
+  }
+
+  .tool-note {
+    font-size: 12px;
+    color: #8a93a6;
+  }
+
+  .warning-note {
+    background: #fff8e1;
+    border: 1px solid #f5c518;
+    border-left: 3px solid #f5c518;
+    border-radius: 5px;
+    padding: 7px 12px;
+    font-size: 12px;
+    color: #7a5c00;
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .checklist-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border: 1px solid #e4e8f0;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f2f5;
+    font-size: 13px;
+  }
+  .checklist-item:last-child { border-bottom: none; }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d0d5e0;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .tip-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px 18px;
+    border: 1px solid #e4e8f0;
+    font-size: 13px;
+    color: #3a4257;
+    line-height: 1.6;
+  }
+
+  .tip-card strong {
+    display: block;
+    color: #1a2035;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #8a93a6;
+    padding: 20px 0 32px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Internal Workshop · Beginners</div>
+  <div class="header-title">Getting Started with Claude Cowork</div>
+  <div class="header-sub">Everything you need to set up before the session</div>
+</div>
+
+<div class="container">
+
+  <div class="intro-card">
+    <p>Claude Cowork is a desktop AI agent that works directly with your local files — documents, spreadsheets, presentations — from inside the Claude Desktop app. Unlike the browser version of Claude, <strong>Cowork can open, read, edit, and create files on your machine.</strong> No coding skills needed.</p>
+  </div>
+
+  <div class="section-title">What You Need to Install</div>
+  <div class="tools-grid">
+
+    <div class="tool-card">
+      <div class="tool-icon icon-blue">🖥️</div>
+      <div class="tool-body">
+        <div class="tool-name">Claude Desktop App</div>
+        <p class="tool-desc">The main app that runs Cowork. Download, install, sign in, then click the <strong>Cowork tab</strong> in the sidebar. On first run it downloads a small VM image — just let it complete.</p>
+        <div class="tool-action">
+          <a class="download-link" href="https://claude.ai/download" target="_blank">↓ claude.ai/download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon icon-green">🐍</div>
+      <div class="tool-body">
+        <div class="tool-name">Python</div>
+        <p class="tool-desc">Powers scripts and automations that run under the hood. You don't need to write any code — it just needs to be installed on your machine.</p>
+        <div class="tool-action">
+          <a class="download-link" href="https://python.org/downloads" target="_blank">↓ python.org/downloads</a>
+          <span class="tool-note">Version 3.11 or newer</span>
+        </div>
+        <div class="warning-note">⚠️ During installation, tick <strong>"Add Python to PATH"</strong> — easy to miss</div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon icon-purple">⬡</div>
+      <div class="tool-body">
+        <div class="tool-name">Node.js</div>
+        <p class="tool-desc">Required by some Cowork plugins and connectors. Not needed immediately but good to have for when you want to extend Cowork's capabilities.</p>
+        <div class="tool-action">
+          <a class="download-link" href="https://nodejs.org" target="_blank">↓ nodejs.org</a>
+          <span class="tool-note">Download the LTS version</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon icon-orange">🔌</div>
+      <div class="tool-body">
+        <div class="tool-name">MCP Connectors</div>
+        <p class="tool-desc">How Cowork connects to Gmail, Google Calendar, Google Drive, and other services. Once linked, Cowork can read emails, check your calendar, and pull data — all without switching tabs. One-click authorisation per service, no coding needed.</p>
+        <div class="tool-action">
+          <span class="tool-note">⚙️ Claude Desktop → Settings → Connectors</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Setup Checklist</div>
+  <div class="checklist-card">
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span>Claude Desktop installed and signed in</span>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span>Cowork tab visible in the sidebar</span>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span>Folder access granted in Cowork settings</span>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span>Python installed and added to PATH</span>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span>Node.js installed</span>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span>At least one MCP connector linked (e.g. Gmail)</span>
+    </div>
+  </div>
+
+  <div class="section-title">Quick Tips</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <strong>Start with one folder</strong>
+      Grant Cowork access to a single folder first, read-only if possible. You can always add more later.
+    </div>
+    <div class="tip-card">
+      <strong>You're always in control</strong>
+      Cowork shows you what it's doing and asks before making any changes to your files.
+    </div>
+    <div class="tip-card">
+      <strong>Best first task</strong>
+      Pick something repetitive you do manually every week — formatting a report, summarising a file, drafting an email.
+    </div>
+    <div class="tip-card">
+      <strong>No coding needed</strong>
+      Describe what you want in plain language and Cowork figures out the rest.
+    </div>
+  </div>
+
+  <div class="footer">Internal workshop use only · Not an official Anthropic document</div>
+
+</div>
+</body>
+</html>

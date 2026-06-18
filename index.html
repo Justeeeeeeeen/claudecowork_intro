@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started with Claude Cowork</title>
+<title>Claude Cowork Workshop</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,39 +15,126 @@
     line-height: 1.6;
   }
 
+  /* ── HEADER ── */
   .header {
     background: #1a2035;
     color: white;
-    padding: 28px 40px;
+    padding: 22px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .header-eyebrow {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: #8a93a6;
-    margin-bottom: 6px;
-  }
-  .header-title {
-    font-size: 26px;
-    font-weight: 700;
     margin-bottom: 4px;
   }
-  .header-sub {
-    font-size: 13px;
-    color: #8a93a6;
+  .header-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .header-badge {
+    background: #EE4D2D;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
   }
 
+  /* ── MAIN TABS ── */
+  .main-nav {
+    background: white;
+    border-bottom: 2px solid #e4e8f0;
+    padding: 0 40px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .main-tab-btn {
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8a93a6;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .main-tab-btn:hover { color: #1a2035; }
+  .main-tab-btn.active {
+    color: #1a2035;
+    border-bottom-color: #EE4D2D;
+  }
+  .tab-num {
+    display: inline-block;
+    background: #f0f2f5;
+    color: #8a93a6;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-right: 6px;
+  }
+  .main-tab-btn.active .tab-num {
+    background: #EE4D2D;
+    color: white;
+  }
+
+  /* ── MAIN TAB PANELS ── */
+  .main-panel { display: none; }
+  .main-panel.active { display: block; }
+
+  /* ── CONTAINER ── */
   .container {
     max-width: 860px;
     margin: 0 auto;
     padding: 32px 24px;
   }
 
+  /* ── SUB-TABS (Intro section) ── */
+  .sub-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .sub-tab-btn {
+    padding: 7px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5a6478;
+    background: white;
+    border: 1px solid #d0d5e0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .sub-tab-btn:hover { border-color: #1a2035; color: #1a2035; }
+  .sub-tab-btn.active {
+    background: #1a2035;
+    color: white;
+    border-color: #1a2035;
+  }
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; }
+
+  /* ── SCROLL ANCHORS ── */
+  .scroll-section {
+    padding-top: 12px;
+    margin-bottom: 48px;
+  }
+  .scroll-section:last-child { margin-bottom: 0; }
+
+  /* ── CARDS ── */
   .intro-card {
     background: white;
     border-radius: 8px;
     padding: 20px 24px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     border-left: 4px solid #EE4D2D;
   }
   .intro-card p {
@@ -56,6 +143,20 @@
     line-height: 1.7;
   }
 
+  .info-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 1px solid #e4e8f0;
+  }
+  .info-card p {
+    font-size: 13px;
+    color: #3a4257;
+    line-height: 1.7;
+  }
+
+  /* ── SECTION TITLES ── */
   .section-title {
     font-size: 11px;
     font-weight: 700;
@@ -63,15 +164,24 @@
     letter-spacing: 1.2px;
     color: #8a93a6;
     margin-bottom: 14px;
+    margin-top: 28px;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  .page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a2035;
+    margin-bottom: 6px;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: #8a93a6;
+    margin-bottom: 24px;
   }
 
-  .tools-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
+  /* ── TOOL CARDS (pre-read) ── */
+  .tools-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
   .tool-card {
     background: white;
     border-radius: 8px;
@@ -81,147 +191,360 @@
     align-items: flex-start;
     border: 1px solid #e4e8f0;
   }
-
   .tool-icon {
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
   }
-
   .icon-blue   { background: #e8f0fe; }
   .icon-green  { background: #e8f5e9; }
   .icon-purple { background: #f3e8fd; }
   .icon-orange { background: #fff3e0; }
-
   .tool-body { flex: 1; }
-
-  .tool-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a2035;
-    margin-bottom: 4px;
-  }
-
-  .tool-desc {
-    font-size: 13px;
-    color: #5a6478;
-    margin-bottom: 10px;
-  }
-
-  .tool-action {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
+  .tool-name { font-size: 14px; font-weight: 700; color: #1a2035; margin-bottom: 4px; }
+  .tool-desc { font-size: 13px; color: #5a6478; margin-bottom: 10px; }
+  .tool-action { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .download-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #1a2035;
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 5px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #1a2035; color: white; text-decoration: none;
+    font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 5px;
   }
-
-  .tool-note {
-    font-size: 12px;
-    color: #8a93a6;
-  }
-
+  .tool-note { font-size: 12px; color: #8a93a6; }
   .warning-note {
-    background: #fff8e1;
-    border: 1px solid #f5c518;
-    border-left: 3px solid #f5c518;
-    border-radius: 5px;
-    padding: 7px 12px;
-    font-size: 12px;
-    color: #7a5c00;
-    margin-top: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    background: #fff8e1; border: 1px solid #f5c518;
+    border-left: 3px solid #f5c518; border-radius: 5px;
+    padding: 7px 12px; font-size: 12px; color: #7a5c00;
+    margin-top: 8px; display: inline-flex; align-items: center; gap: 6px;
   }
 
+  /* ── CHECKLIST ── */
   .checklist-card {
-    background: white;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin-bottom: 28px;
-    border: 1px solid #e4e8f0;
+    background: white; border-radius: 8px;
+    padding: 20px 24px; margin-bottom: 28px; border: 1px solid #e4e8f0;
   }
-
   .checklist-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f2f5;
-    font-size: 13px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid #f0f2f5; font-size: 13px;
+    cursor: pointer; user-select: none;
   }
   .checklist-item:last-child { border-bottom: none; }
-
   .check-box {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #d0d5e0;
-    border-radius: 4px;
-    flex-shrink: 0;
+    width: 18px; height: 18px; border: 2px solid #d0d5e0;
+    border-radius: 4px; flex-shrink: 0; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .checklist-item.checked .check-box {
+    background: #2f9e44; border-color: #2f9e44; color: white; font-size: 11px;
   }
 
-  .tips-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
+  /* ── TIPS GRID ── */
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
   .tip-card {
-    background: white;
-    border-radius: 8px;
-    padding: 16px 18px;
+    background: white; border-radius: 8px; padding: 16px 18px;
+    border: 1px solid #e4e8f0; font-size: 13px; color: #3a4257; line-height: 1.6;
+  }
+  .tip-card strong { display: block; color: #1a2035; margin-bottom: 4px; font-size: 13px; }
+
+  /* ── WHY COWORK CARDS ── */
+  .why-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .why-card {
+    background: white; border-radius: 8px;
+    padding: 20px 24px; border: 1px solid #e4e8f0;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .why-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .why-body {}
+  .why-title { font-size: 14px; font-weight: 700; color: #1a2035; margin-bottom: 6px; }
+  .why-desc { font-size: 13px; color: #5a6478; line-height: 1.6; }
+  .why-example {
+    margin-top: 10px; background: #f7f8fc;
+    border-left: 3px solid #EE4D2D;
+    padding: 8px 12px; border-radius: 0 5px 5px 0;
+    font-size: 12px; color: #3a4257;
+  }
+  .why-example strong { color: #EE4D2D; }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+  .concept-card {
+    background: white; border-radius: 8px;
+    border: 1px solid #e4e8f0; overflow: hidden;
+  }
+  .concept-header {
+    background: #1a2035; color: white;
+    padding: 12px 20px; display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+  }
+  .concept-icon { font-size: 18px; }
+  .concept-title { font-size: 14px; font-weight: 700; flex: 1; }
+  .concept-tagline { font-size: 11px; color: #8a93a6; }
+  .concept-chevron { font-size: 12px; color: #8a93a6; transition: transform 0.2s; }
+  .concept-card.open .concept-chevron { transform: rotate(180deg); }
+  .concept-body {
+    padding: 0 20px; max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.2s;
+  }
+  .concept-card.open .concept-body {
+    padding: 18px 20px; max-height: 800px;
+  }
+  .concept-what { font-size: 13px; color: #3a4257; line-height: 1.7; margin-bottom: 12px; }
+  .concept-why {
+    background: #e8f0fe; border-radius: 6px;
+    padding: 10px 14px; font-size: 12px; color: #1a2035; margin-bottom: 12px;
+  }
+  .concept-why strong { display: block; margin-bottom: 3px; color: #3a5bb5; }
+  .concept-how {
+    background: #f7f8fc; border-radius: 6px;
+    padding: 10px 14px; font-size: 12px; color: #1a2035;
+  }
+  .concept-how strong { display: block; margin-bottom: 4px; }
+
+  /* folder tree */
+  .folder-tree {
+    font-family: monospace; font-size: 12px;
+    background: #1a2035; color: #d0d9f0;
+    border-radius: 6px; padding: 14px 16px;
+    margin: 10px 0; line-height: 1.8;
+  }
+  .folder-tree .folder { color: #79b8ff; }
+  .folder-tree .file-md { color: #85e89d; }
+  .folder-tree .comment { color: #6a737d; }
+
+  /* ── EXERCISE CARDS ── */
+  .exercise-hero {
+    background: #1a2035; color: white;
+    border-radius: 8px; padding: 24px 28px; margin-bottom: 24px;
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .exercise-num {
+    font-size: 40px; font-weight: 700; color: #EE4D2D;
+    line-height: 1; flex-shrink: 0;
+  }
+  .exercise-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .exercise-desc { font-size: 13px; color: #8a93a6; line-height: 1.6; }
+  .exercise-goal {
+    margin-top: 10px; background: rgba(238,77,45,0.15);
+    border-left: 3px solid #EE4D2D;
+    padding: 8px 12px; border-radius: 0 5px 5px 0;
+    font-size: 12px; color: #ffb4a0;
+  }
+  .exercise-goal strong { color: #EE4D2D; }
+
+  .steps-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .step-card {
+    background: white; border-radius: 8px;
+    padding: 16px 20px; border: 1px solid #e4e8f0;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #1a2035; color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .step-body {}
+  .step-title { font-size: 13px; font-weight: 700; color: #1a2035; margin-bottom: 4px; }
+  .step-desc { font-size: 13px; color: #5a6478; line-height: 1.6; }
+  .step-prompt {
+    margin-top: 8px; background: #f0f7ff;
+    border: 1px dashed #a8c4e8; border-radius: 5px;
+    padding: 8px 12px; font-size: 12px; color: #2a4a7a;
+    font-style: italic;
+  }
+  .step-prompt strong { font-style: normal; color: #1a2035; display: block; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .insights-card {
+    background: #fff8f0; border: 1px solid #f5c518;
+    border-left: 4px solid #EE4D2D;
+    border-radius: 8px; padding: 18px 22px; margin-bottom: 24px;
+  }
+  .insights-title { font-size: 13px; font-weight: 700; color: #1a2035; margin-bottom: 12px; }
+  .insight-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: #3a4257; margin-bottom: 10px; line-height: 1.6;
+  }
+  .insight-item:last-child { margin-bottom: 0; }
+  .insight-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout-note {
+    background: #e8f4fd; border-left: 4px solid #3a9fd8;
+    border-radius: 0 6px 6px 0; padding: 12px 16px;
+    font-size: 13px; color: #1a4a6e; margin: 14px 0; line-height: 1.6;
+  }
+  .callout-warning {
+    background: #fff8e1; border-left: 4px solid #f5c518;
+    border-radius: 0 6px 6px 0; padding: 12px 16px;
+    font-size: 13px; color: #7a5c00; margin: 14px 0; line-height: 1.6;
+  }
+
+  /* ── FOUNDATION CONCEPTS VERTICAL SLIDES ── */
+  .fc-stack { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Overview slide */
+  .fc-overview {
+    background: #1a2035 !important;
+    border-color: #1a2035 !important;
+  }
+  .fc-overview-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: #EE4D2D; margin-bottom: 8px;
+  }
+  .fc-overview-title {
+    font-size: 22px; font-weight: 700; color: white;
+    margin-bottom: 6px; line-height: 1.3;
+  }
+  .fc-overview-sub { font-size: 13px; color: #8a93a6; margin-bottom: 24px; }
+  .fc-overview-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  }
+  .fc-overview-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-top: 3px solid #EE4D2D;
+    border-radius: 6px; padding: 14px 12px;
+  }
+  .fc-ov-num {
+    font-size: 22px; font-weight: 700; color: #EE4D2D;
+    line-height: 1; margin-bottom: 8px;
+  }
+  .fc-ov-name { font-size: 13px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .fc-ov-desc { font-size: 11px; color: #8a93a6; line-height: 1.5; }
+
+  /* Individual slides */
+  .fc-slide {
+    background: white; border-radius: 10px;
     border: 1px solid #e4e8f0;
-    font-size: 13px;
-    color: #3a4257;
-    line-height: 1.6;
+    border-top: 4px solid #EE4D2D;
+    padding: 28px 28px 24px;
+  }
+  .fc-slide-num {
+    font-size: 36px; font-weight: 700; color: #EE4D2D;
+    line-height: 1; margin-bottom: 10px;
+  }
+  .fc-slide-title {
+    font-size: 18px; font-weight: 700; color: #1a2035;
+    line-height: 1.4; margin-bottom: 16px;
+  }
+  .fc-insight-bar {
+    background: #fff0ed; border-left: 4px solid #EE4D2D;
+    border-radius: 0 6px 6px 0; padding: 10px 14px;
+    font-size: 13px; color: #7a2a10; line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .fc-two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .fc-col-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: #EE4D2D; margin-bottom: 10px;
+  }
+  .fc-code-block {
+    font-family: monospace; font-size: 12px; line-height: 1.9;
+    background: #1a2035; color: #c8d0e0;
+    border-left: 3px solid #EE4D2D;
+    border-radius: 0 6px 6px 0; padding: 12px 14px;
+  }
+  .fc-tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .fc-tag {
+    background: #fff0ed; color: #EE4D2D; border: 1px solid #EE4D2D;
+    border-radius: 20px; font-size: 11px; font-weight: 600;
+    padding: 3px 10px;
+  }
+  .fc-rule-box {
+    background: #f7f8fc; border-radius: 6px;
+    padding: 10px 14px; font-size: 12px; color: #3a4257; line-height: 1.6;
+    margin-top: 10px;
+  }
+  .fc-compare-box {
+    border: 2px solid #e4e8f0; border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .fc-flow { display: flex; flex-direction: column; gap: 4px; }
+  .fc-flow-step {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: #f7f8fc; border-radius: 6px; padding: 10px 12px;
+  }
+  .fc-flow-dot {
+    background: #1a2035; color: white; font-size: 10px; font-weight: 700;
+    border-radius: 4px; padding: 3px 7px; flex-shrink: 0; white-space: nowrap;
+  }
+  .fc-flow-text { font-size: 12px; color: #3a4257; line-height: 1.6; }
+  .fc-flow-arrow { font-size: 14px; color: #EE4D2D; padding-left: 16px; }
+  .fc-filetype-row { display: flex; flex-direction: column; gap: 8px; }
+  .fc-filetype {
+    display: flex; gap: 12px; align-items: flex-start;
+    border: 1px solid #e4e8f0; border-radius: 6px; padding: 10px 12px;
+  }
+  .fc-ft-icon {
+    width: 38px; height: 28px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .fc-ft-desc { font-size: 12px; color: #5a6478; line-height: 1.5; }
+  .fc-reason-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .fc-reason {
+    display: flex; gap: 10px; font-size: 12px;
+    color: #3a4257; line-height: 1.6;
+  }
+  .fc-reason-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #EE4D2D; flex-shrink: 0; margin-top: 5px;
+  }
+  .fc-example-pill {
+    background: #fff0ed; border: 1px solid #EE4D2D;
+    border-radius: 6px; padding: 10px 12px;
+    font-size: 12px; color: #1a2035; font-weight: 600; text-align: center;
   }
 
-  .tip-card strong {
-    display: block;
-    color: #1a2035;
-    margin-bottom: 4px;
-    font-size: 13px;
-  }
-
+  /* ── FOOTER ── */
   .footer {
-    text-align: center;
-    font-size: 11px;
-    color: #8a93a6;
+    text-align: center; font-size: 11px; color: #8a93a6;
     padding: 20px 0 32px;
   }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <div class="header-eyebrow">Internal Workshop · Beginners</div>
-  <div class="header-title">Getting Started with Claude Cowork</div>
-  <div class="header-sub">Everything you need to set up before the session</div>
+  <div>
+    <div class="header-eyebrow">Internal Workshop · SPX Philippines</div>
+    <div class="header-title">Claude Cowork</div>
+  </div>
+  <div class="header-badge">INTRODUCTION</div>
 </div>
 
+<!-- MAIN NAV -->
+<div class="main-nav">
+  <div class="main-tab-btn active" onclick="switchMain('preread', this)">
+    <span class="tab-num">0</span>Pre-read
+  </div>
+  <div class="main-tab-btn" onclick="switchMain('intro', this)">
+    <span class="tab-num">1</span>Intro to Cowork
+  </div>
+  <div class="main-tab-btn" onclick="switchMain('ex1', this)">
+    <span class="tab-num">2</span>Exercise 1: Email Automation
+  </div>
+  <div class="main-tab-btn" onclick="switchMain('ex2', this)">
+    <span class="tab-num">3</span>Exercise 2: Build a Webpage
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 0 — PRE-READ
+══════════════════════════════════════════ -->
+<div id="panel-preread" class="main-panel active">
 <div class="container">
 
   <div class="intro-card">
-    <p>Claude Cowork is a desktop AI agent that works directly with your local files — documents, spreadsheets, presentations — from inside the Claude Desktop app. Unlike the browser version of Claude, <strong>Cowork can open, read, edit, and create files on your machine.</strong> No coding skills needed.</p>
+    <p>Claude Cowork is a desktop AI agent that works directly with your local files — documents, spreadsheets, presentations — from inside the Claude Desktop app. Unlike Claude Chat or Claude Code, <strong>Cowork can open, read, edit, and create files on your machine</strong> and run tasks autonomously. No coding skills needed.</p>
   </div>
 
   <div class="section-title">What You Need to Install</div>
@@ -242,7 +565,7 @@
       <div class="tool-icon icon-green">🐍</div>
       <div class="tool-body">
         <div class="tool-name">Python</div>
-        <p class="tool-desc">Powers scripts and automations that run under the hood. You don't need to write any code — it just needs to be installed on your machine.</p>
+        <p class="tool-desc">Cowork uses Python internally to run automations. You don't write any code — it just needs to be installed on your machine.</p>
         <div class="tool-action">
           <a class="download-link" href="https://python.org/downloads" target="_blank">↓ python.org/downloads</a>
           <span class="tool-note">Version 3.11 or newer</span>
@@ -267,7 +590,7 @@
       <div class="tool-icon icon-orange">🔌</div>
       <div class="tool-body">
         <div class="tool-name">MCP Connectors</div>
-        <p class="tool-desc">How Cowork connects to Gmail, Google Calendar, Google Drive, and other services. Once linked, Cowork can read emails, check your calendar, and pull data — all without switching tabs. One-click authorisation per service, no coding needed.</p>
+        <p class="tool-desc">How Cowork connects to Gmail, Google Calendar, Google Drive, and other services. Once linked, Cowork can read emails, check your calendar, and pull data — all without switching tabs.</p>
         <div class="tool-action">
           <span class="tool-note">⚙️ Claude Desktop → Settings → Connectors</span>
         </div>
@@ -278,27 +601,27 @@
 
   <div class="section-title">Setup Checklist</div>
   <div class="checklist-card">
-    <div class="checklist-item">
+    <div class="checklist-item" onclick="toggleCheck(this)">
       <div class="check-box"></div>
       <span>Claude Desktop installed and signed in</span>
     </div>
-    <div class="checklist-item">
+    <div class="checklist-item" onclick="toggleCheck(this)">
       <div class="check-box"></div>
       <span>Cowork tab visible in the sidebar</span>
     </div>
-    <div class="checklist-item">
+    <div class="checklist-item" onclick="toggleCheck(this)">
       <div class="check-box"></div>
       <span>Folder access granted in Cowork settings</span>
     </div>
-    <div class="checklist-item">
+    <div class="checklist-item" onclick="toggleCheck(this)">
       <div class="check-box"></div>
       <span>Python installed and added to PATH</span>
     </div>
-    <div class="checklist-item">
+    <div class="checklist-item" onclick="toggleCheck(this)">
       <div class="check-box"></div>
       <span>Node.js installed</span>
     </div>
-    <div class="checklist-item">
+    <div class="checklist-item" onclick="toggleCheck(this)">
       <div class="check-box"></div>
       <span>At least one MCP connector linked (e.g. Gmail)</span>
     </div>
@@ -325,7 +648,1219 @@
   </div>
 
   <div class="footer">Internal workshop use only · Not an official Anthropic document</div>
-
 </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 1 — INTRO TO COWORK
+══════════════════════════════════════════ -->
+<div id="panel-intro" class="main-panel">
+<div class="container">
+
+  <!-- Sub-tab nav -->
+  <div class="sub-nav">
+    <div class="sub-tab-btn active" onclick="switchSub('intro-welcome', this)">👋 Welcome</div>
+    <div class="sub-tab-btn" onclick="switchSub('intro-why', this)">💡 Why Cowork</div>
+    <div class="sub-tab-btn" onclick="switchSub('intro-concepts', this)">🧱 Foundation Concepts</div>
+  </div>
+
+  <!-- Sub-panel: Welcome -->
+  <div id="panel-intro-welcome" class="sub-panel active">
+    <div class="page-title">Welcome to the Workshop</div>
+    <div class="page-subtitle">Here's what we'll cover today and what you'll walk away with</div>
+
+    <div class="info-card">
+      <p>This isn't a demo you watch — it's a session you do. By the end of the hour, you'll have set up a real automation, built something you can actually use at work, and have a mental model for what Cowork can do for your daily tasks.</p>
+    </div>
+
+    <div class="section-title">Today's Agenda</div>
+    <div class="concept-grid">
+
+      <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f2f5;">
+          <div style="background:#1a2035;color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;flex-shrink:0;">5 MIN</div>
+          <div style="font-size:14px;font-weight:700;">Welcome &amp; framing</div>
+        </div>
+        <div style="padding:12px 20px;font-size:13px;color:#5a6478;">What Cowork is, what today covers, and what you'll walk away able to do.</div>
+      </div>
+
+      <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f2f5;">
+          <div style="background:#1a2035;color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;flex-shrink:0;">15 MIN</div>
+          <div style="font-size:14px;font-weight:700;">Intro to Cowork + Foundation Concepts</div>
+        </div>
+        <div style="padding:12px 20px;font-size:13px;color:#5a6478;">The big ideas: agents, memory, skills, knowledge base, and how markdown files fit into all of it.</div>
+      </div>
+
+      <div style="background:white;border-radius:8px;border:1px solid #EE4D2D;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f2f5;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;flex-shrink:0;">15 MIN</div>
+          <div style="font-size:14px;font-weight:700;">Exercise 1 — Email Automation</div>
+        </div>
+        <div style="padding:12px 20px;font-size:13px;color:#5a6478;">Set up a recurring email summary that runs on a schedule — no manual work needed.</div>
+      </div>
+
+      <div style="background:white;border-radius:8px;border:1px solid #EE4D2D;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f2f5;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;flex-shrink:0;">20 MIN</div>
+          <div style="font-size:14px;font-weight:700;">Exercise 2 — Build a Webpage</div>
+        </div>
+        <div style="padding:12px 20px;font-size:13px;color:#5a6478;">Turn your data into a live HTML dashboard — no coding required.</div>
+      </div>
+
+      <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f2f5;">
+          <div style="background:#8a93a6;color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;flex-shrink:0;">5 MIN</div>
+          <div style="font-size:14px;font-weight:700;">Wrap-up &amp; what's next</div>
+        </div>
+        <div style="padding:12px 20px;font-size:13px;color:#5a6478;">What to try this week and how to keep building.</div>
+      </div>
+
+    </div>
+
+    <div class="callout-note">
+      <strong>Before we start:</strong> Make sure you've completed the pre-read (Tab 0) — Claude Desktop installed, Python + Node.js ready, and at least one connector linked.
+    </div>
+  </div>
+
+  <!-- Sub-panel: Why Cowork -->
+  <div id="panel-intro-why" class="sub-panel">
+    <div class="page-title">Why Cowork?</div>
+    <div class="page-subtitle">The shift from answering questions to actually doing work</div>
+
+    <div class="info-card">
+      <p>You might already use <strong>Claude Chat</strong> (claude.ai) to draft emails or answer questions, or <strong>Claude Code</strong> to help write scripts. Both are reactive — you ask, they respond, and the job is done when the conversation ends.</p>
+      <p style="margin-top:10px;"><strong>Cowork is different.</strong> It's an agent that lives on your machine. It can open your real files, connect to your tools, run multi-step tasks, and operate on a schedule — all without you prompting every step.</p>
+    </div>
+
+    <div class="section-title">Three Reasons It Matters for SPX Work</div>
+    <div class="why-grid">
+
+      <div class="why-card">
+        <div class="why-icon icon-orange">⏱️</div>
+        <div class="why-body">
+          <div class="why-title">Eliminates repetitive manual work</div>
+          <div class="why-desc">Anything you do on a schedule — formatting reports, copying data between files, drafting the same type of email — Cowork can do for you automatically.</div>
+          <div class="why-example"><strong>SPX example:</strong> Instead of manually compiling your weekly 3WH utilisation report every Monday, Cowork reads the CSV, formats it, pulls insights, and drafts the email — you just review and send.</div>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon icon-blue">📁</div>
+        <div class="why-body">
+          <div class="why-title">Works with your actual files</div>
+          <div class="why-desc">Unlike browser Claude where you paste content in, Cowork is given access to your real folders. It can read a spreadsheet, edit a Word doc, and save a new file — all in one go.</div>
+          <div class="why-example"><strong>SPX example:</strong> "Read all the dispute logs from this week's folder, find patterns, and write a summary" — Cowork does it across every file, not just one you paste in.</div>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon icon-purple">🤖</div>
+        <div class="why-body">
+          <div class="why-title">Agents that think, chain, and interact</div>
+          <div class="why-desc">This is the big idea. An agent isn't just Claude answering one question — it's Claude reasoning through a multi-step task, using tools (Gmail, Calendar, your files), making decisions, and looping back when something needs checking.</div>
+          <div class="why-example"><strong>Think of it like:</strong> A junior analyst who has access to your laptop. You leave them a note about what needs doing, and when you come back, it's done — with decisions logged so you can review them.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-title">Three modes of Claude — pick the right tool</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:24px;">
+
+      <!-- Chat -->
+      <div style="background:white;border-radius:10px;border:1px solid #e4e8f0;border-top:4px solid #8a93a6;padding:20px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8a93a6;margin-bottom:6px;">Claude Chat</div>
+        <div style="font-size:16px;font-weight:700;color:#1a2035;margin-bottom:10px;">Ask questions,<br>get answers</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.8;margin-bottom:14px;">Like a very smart chatbot. Great for one-off questions, drafting, summarising, or brainstorming — when you don't need it to touch your files or tools.</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8a93a6;margin-bottom:8px;">Best for</div>
+        <div style="font-size:12px;color:#3a4257;line-height:2;">💬 "Summarise this email for me"<br>✏️ "Help me rewrite this report"<br>❓ "Explain what 3WH means"</div>
+        <div style="margin-top:14px;background:#f7f8fc;border-radius:6px;padding:8px 12px;font-size:11px;color:#8a93a6;">No file access · No memory between chats · No automation</div>
+      </div>
+
+      <!-- Cowork -->
+      <div style="background:white;border-radius:10px;border:2px solid #EE4D2D;border-top:4px solid #EE4D2D;padding:20px;position:relative;">
+        <div style="position:absolute;top:-1px;right:14px;background:#EE4D2D;color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:0 0 6px 6px;letter-spacing:0.5px;">HIGHLY RECOMMENDED</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#EE4D2D;margin-bottom:6px;">Claude Cowork</div>
+        <div style="font-size:16px;font-weight:700;color:#1a2035;margin-bottom:10px;">Automate tasks,<br>work with your files</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.8;margin-bottom:14px;">An agent on your desktop. Opens your real files, connects to Gmail and Calendar, runs tasks on a schedule — without you prompting every step. Built for everyone, no coding needed.</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#EE4D2D;margin-bottom:8px;">Best for</div>
+        <div style="font-size:12px;color:#3a4257;line-height:2;">📊 Weekly report generation<br>📧 Automated email digests<br>📁 Reading &amp; editing your files</div>
+        <div style="margin-top:14px;background:#fff0ed;border-radius:6px;padding:8px 12px;font-size:11px;color:#EE4D2D;font-weight:600;">Repetitive work · File access · Connectors · Scheduling</div>
+      </div>
+
+      <!-- Code -->
+      <div style="background:white;border-radius:10px;border:1px solid #e4e8f0;border-top:4px solid #3a5bb5;padding:20px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#3a5bb5;margin-bottom:6px;">Claude Code</div>
+        <div style="font-size:16px;font-weight:700;color:#1a2035;margin-bottom:10px;">Read, write &amp; edit code,<br>build technical tools</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.8;margin-bottom:14px;">A coding-focused tool that reads your codebase, writes scripts, fixes bugs, and edits files line by line. Available via terminal, VS Code, desktop app, or browser — but best suited for those comfortable with technical work.</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8a93a6;margin-bottom:8px;">Best for</div>
+        <div style="font-size:12px;color:#3a4257;line-height:2;">⌨️ Writing Python / SQL scripts<br>🔧 Building &amp; editing technical tools<br>🐛 Reading a codebase &amp; fixing bugs</div>
+        <div style="margin-top:14px;background:#f0f4ff;border-radius:6px;padding:8px 12px;font-size:11px;color:#3a5bb5;">Works in terminal, VS Code, desktop &amp; web · Technical / developer-focused</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sub-panel: Foundation Concepts -->
+  <div id="panel-intro-concepts" class="sub-panel">
+    <div class="fc-stack">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="fc-slide fc-overview">
+        <div class="fc-overview-label">Foundation Concepts</div>
+        <div class="fc-overview-title">5 things to know before you start</div>
+        <div class="fc-overview-sub">Everything in Cowork builds on these. Understand them once — and the rest clicks.</div>
+        <div class="fc-overview-grid">
+          <div class="fc-overview-item">
+            <div class="fc-ov-num">01</div>
+            <div class="fc-ov-name">Markdown files</div>
+            <div class="fc-ov-desc">The file format Cowork reads best</div>
+          </div>
+          <div class="fc-overview-item">
+            <div class="fc-ov-num">02</div>
+            <div class="fc-ov-name">CLAUDE.md</div>
+            <div class="fc-ov-desc">Your standing instructions for every session</div>
+          </div>
+          <div class="fc-overview-item">
+            <div class="fc-ov-num">03</div>
+            <div class="fc-ov-name">Knowledge Base</div>
+            <div class="fc-ov-desc">Your documents, searched on demand</div>
+          </div>
+          <div class="fc-overview-item">
+            <div class="fc-ov-num">04</div>
+            <div class="fc-ov-name">Skills</div>
+            <div class="fc-ov-desc">Reusable prompts you trigger by name</div>
+          </div>
+          <div class="fc-overview-item">
+            <div class="fc-ov-num">05</div>
+            <div class="fc-ov-name">Agents</div>
+            <div class="fc-ov-desc">Autonomous multi-step tasks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SLIDE 1: Markdown ── -->
+      <div class="fc-slide">
+        <div class="fc-slide-num">01</div>
+        <div class="fc-slide-title">Markdown is just a file type — like PDF or DOCX.<br>Claude reads it best.</div>
+        <div class="fc-two-col">
+          <div>
+            <div class="fc-col-label">File types you already know</div>
+            <div class="fc-filetype-row">
+              <div class="fc-filetype">
+                <div class="fc-ft-icon" style="background:#e8f0fe;color:#3a5bb5;">PDF</div>
+                <div class="fc-ft-desc">Fixed layout. Hard for AI to parse — text is trapped in visual formatting.</div>
+              </div>
+              <div class="fc-filetype">
+                <div class="fc-ft-icon" style="background:#e8f5e9;color:#2f7a44;">DOCX</div>
+                <div class="fc-ft-desc">XML under the hood. Lots of hidden tags that get in the way.</div>
+              </div>
+              <div class="fc-filetype" style="border:2px solid #EE4D2D;">
+                <div class="fc-ft-icon" style="background:#EE4D2D;color:white;">.md</div>
+                <div class="fc-ft-desc" style="color:#1a2035;font-weight:600;">Pure text. No hidden formatting. Claude reads every character exactly as written.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="fc-col-label">Why .md is Claude's native language</div>
+            <div class="fc-reason-list">
+              <div class="fc-reason"><span class="fc-reason-dot"></span><div><strong>No binary encoding</strong> — it's plain text, so Claude reads it as-is with no translation layer.</div></div>
+              <div class="fc-reason"><span class="fc-reason-dot"></span><div><strong>Unambiguous structure</strong> — # means heading, - means bullet. No guessing.</div></div>
+              <div class="fc-reason"><span class="fc-reason-dot"></span><div><strong>No noise</strong> — unlike DOCX or PDF, there are no hidden XML tags or layout instructions cluttering the content.</div></div>
+            </div>
+            <div class="fc-code-block">
+<span style="color:#EE4D2D;font-weight:700;"># SPX Weekly Report</span>
+- 3WH utilisation: 87%
+- Active vehicles: 142
+<span style="color:#85e89d;">**Action needed:** Review hub B</span>
+            </div>
+            <div style="font-size:11px;color:#8a93a6;margin-top:6px;">Open any .md file in Notepad — it's just text.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SLIDE 2: CLAUDE.md ── -->
+      <div class="fc-slide">
+        <div class="fc-slide-num">02</div>
+        <div class="fc-slide-title">CLAUDE.md is the briefing note Cowork reads before every session.<br>It tells Claude who you are and how to behave.</div>
+        <div class="fc-insight-bar">Without CLAUDE.md, every session starts blank. With it, Claude already knows your context before you type a word.</div>
+        <div class="fc-two-col">
+          <div>
+            <div class="fc-col-label">What goes in CLAUDE.md</div>
+            <div class="fc-code-block">
+<span style="color:#EE4D2D;font-weight:700;"># SPX Philippines — Context</span>
+We are a last-mile logistics company.
+Vehicle types: 2WH, 3WH, 4WH.
+Language: English only.
+Never send emails without asking me first.
+Always put a summary at the top of reports.
+            </div>
+            <div class="fc-tag-row">
+              <span class="fc-tag">Who we are</span>
+              <span class="fc-tag">Rules &amp; preferences</span>
+              <span class="fc-tag">Output format</span>
+            </div>
+          </div>
+          <div>
+            <div class="fc-col-label">Two-layer structure</div>
+            <div class="folder-tree" style="font-size:12px;line-height:2;">
+<span class="folder">📁 work/</span>
+├── <span class="file-md">CLAUDE.md</span>      <span class="comment">← always loaded</span>
+│                      <span class="comment">  "We are SPX PH, 3 vehicle types…"</span>
+├── <span class="folder">📁 3wh-email/</span>
+│   ├── <span class="file-md">CLAUDE.md</span>  <span class="comment">← task instructions</span>
+│   └── fleet_mix_raw.csv
+└── <span class="folder">📁 3wh-disputes/</span>
+    ├── <span class="file-md">CLAUDE.md</span>  <span class="comment">← escalation rules</span>
+    └── disputes_log.xlsx
+            </div>
+            <div class="fc-rule-box">Root = <strong>who we are.</strong> Task folder = <strong>what to do.</strong> Claude reads both, in that order.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SLIDE 3: Knowledge Base ── -->
+      <div class="fc-slide">
+        <div class="fc-slide-num">03</div>
+        <div class="fc-slide-title">A Knowledge Base is a folder of your documents.<br>Claude searches it on demand — only pulling what's relevant.</div>
+        <div class="fc-insight-bar">CLAUDE.md tells Claude <em>about</em> your work. The KB gives Claude the <em>detail</em> to actually do it.</div>
+        <div class="fc-two-col">
+          <div>
+            <div class="fc-col-label">CLAUDE.md says (always loaded)</div>
+            <div class="fc-compare-box" style="border-color:#8a93a6;">
+              <div style="font-size:13px;color:#1a2035;font-weight:600;line-height:1.6;">"We have 3 vehicle types:<br>2WH, 3WH and 4WH."</div>
+              <div style="font-size:11px;color:#8a93a6;margin-top:8px;">High-level. Always in memory.</div>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="fc-col-label">Knowledge Base contains (searched when needed)</div>
+              <div class="fc-compare-box" style="border-color:#EE4D2D;">
+                <div style="font-size:12px;color:#3a4257;line-height:2;">
+                  📄 2wh_specs.pdf<br>
+                  📄 3wh_utilisation_sop.pdf<br>
+                  📄 4wh_rates.xlsx<br>
+                  📄 dispute_escalation_guide.docx
+                </div>
+                <div style="font-size:11px;color:#8a93a6;margin-top:8px;">Full detail. Only loaded when relevant.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="fc-col-label">How it works in practice</div>
+            <div class="fc-flow">
+              <div class="fc-flow-step">
+                <div class="fc-flow-dot">You</div>
+                <div class="fc-flow-text">"What is the 3WH utilisation target?"</div>
+              </div>
+              <div class="fc-flow-arrow">↓</div>
+              <div class="fc-flow-step">
+                <div class="fc-flow-dot" style="background:#EE4D2D;">AI</div>
+                <div class="fc-flow-text">Searches KB → finds <strong>3wh_utilisation_sop.pdf</strong> → ignores 2WH and 4WH files entirely</div>
+              </div>
+              <div class="fc-flow-arrow">↓</div>
+              <div class="fc-flow-step">
+                <div class="fc-flow-dot" style="background:#2f9e44;">✓</div>
+                <div class="fc-flow-text">Answers using only the relevant document</div>
+              </div>
+            </div>
+            <div class="fc-rule-box" style="margin-top:14px;"><strong>To build one:</strong> Create a folder, drop in your documents, grant Cowork access. No setup beyond that.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SLIDE 4: Skills ── -->
+      <div class="fc-slide">
+        <div class="fc-slide-num">04</div>
+        <div class="fc-slide-title">A skill is a saved prompt with a name.<br>Type the name — Cowork does the rest.</div>
+        <div class="fc-insight-bar">Stop retyping the same long prompt every Monday. Save it once as a skill and trigger it in seconds.</div>
+        <div class="fc-two-col">
+          <div>
+            <div class="fc-col-label">Without a skill — every Monday</div>
+            <div class="fc-code-block" style="border-left-color:#e03131;color:#c0c8d8;">
+"Read fleet_mix_raw.csv, calculate
+utilisation by vehicle type, find
+the top 3 insights, draft an email
+to ops-team@spx.com with subject
+'Weekly 3WH Update', format as
+bullet points, attach the summary…"
+            </div>
+            <div style="font-size:12px;color:#e03131;margin-top:6px;">Typed out. Every. Single. Week.</div>
+          </div>
+          <div>
+            <div class="fc-col-label">With a skill — every Monday</div>
+            <div style="background:#EE4D2D;border-radius:8px;padding:16px 20px;margin-bottom:12px;">
+              <div style="font-size:15px;font-weight:700;color:white;">"Generate fleet mix email"</div>
+              <div style="font-size:12px;color:#ffcfc4;margin-top:4px;">Cowork knows the rest. You defined it once.</div>
+            </div>
+            <div class="fc-rule-box"><strong>To create one:</strong> Ask Cowork — <em>"Create a skill for my weekly fleet mix email."</em> It writes the skill file for you.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SLIDE 5: Agents ── -->
+      <div class="fc-slide">
+        <div class="fc-slide-num">05</div>
+        <div class="fc-slide-title">An agent doesn't just answer — it acts.<br>Multi-step. Autonomous. Reports back when done.</div>
+        <div class="fc-insight-bar">Claude Chat responds to one question. An agent takes a goal and figures out all the steps itself.</div>
+        <div class="fc-two-col">
+          <div>
+            <div class="fc-col-label">Claude Chat</div>
+            <div style="background:#f0f2f5;border-radius:8px;padding:16px;font-size:13px;color:#3a4257;line-height:1.8;">
+              You: <em>"Summarise this dispute email."</em><br>
+              Claude: <em>"Here's a summary."</em><br>
+              <div style="font-size:11px;color:#8a93a6;margin-top:8px;">One input → one output. Stops there.</div>
+            </div>
+          </div>
+          <div>
+            <div class="fc-col-label">Cowork Agent</div>
+            <div style="background:#1a2035;border-radius:8px;padding:16px;font-size:13px;color:#d0d9f0;line-height:1.8;">
+              You: <em>"Handle today's disputes."</em><br>
+              <div style="margin-top:8px;border-left:3px solid #EE4D2D;padding-left:10px;line-height:2;">
+                Reads dispute_log.xlsx<br>
+                Checks escalation_sop.pdf<br>
+                Drafts 4 reply emails<br>
+                Saves to /replies folder<br>
+                <span style="color:#EE4D2D;font-weight:700;">Reports back: "Done. 1 flagged urgent."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <div class="fc-col-label" style="margin-bottom:10px;">Real examples from your daily work</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div class="fc-example-pill">📧 Scheduled email digest every 8am</div>
+            <div class="fc-example-pill">📊 Weekly report generated from CSV</div>
+            <div class="fc-example-pill">🤖 Seatalk bot answering team questions</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <a href="https://www.eweek.com/news/agentic-ai-trend-2026/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#3a5bb5;text-decoration:none;border-bottom:1px solid #a8c4e8;">
+            📰 Further reading: Agentic AI is Set to Dominate in 2026 — eWeek ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">Internal workshop use only · Not an official Anthropic document</div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 2 — EXERCISE 1: EMAIL AUTOMATION
+══════════════════════════════════════════ -->
+<div id="panel-ex1" class="main-panel">
+<div class="container">
+
+  <div class="exercise-hero">
+    <div class="exercise-num">01</div>
+    <div>
+      <div class="exercise-title">Email Automation</div>
+      <div class="exercise-desc">Turn any recurring email you send manually into a one-prompt skill — memory, knowledge base, and a working draft.</div>
+      <div class="exercise-goal"><strong>Goal:</strong> Walk away with a working skill that generates your recurring email report. Pick any email you send regularly — or use the 3WH Fleet Mix example below if you don't have one in mind.</div>
+    </div>
+  </div>
+
+  <!-- Pick your email -->
+  <div style="background:white;border:1px solid #e4e8f0;border-radius:8px;padding:18px 20px;margin-bottom:24px;">
+    <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:12px;">🎯 First: pick the email you want to automate</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="border:2px solid #e4e8f0;border-radius:6px;padding:14px;">
+        <div style="font-size:12px;font-weight:700;color:#1a2035;margin-bottom:6px;">Bring your own email</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">Think of a report you send every week or month. Any recurring email works — ops summaries, SLA updates, dispute reports, hub performance.</div>
+        <div style="margin-top:10px;font-size:11px;color:#8a93a6;font-style:italic;">Have the data source handy (a CSV, spreadsheet, or even a past email to reference)</div>
+      </div>
+      <div style="border:2px solid #EE4D2D;border-radius:6px;padding:14px;background:#fff8f6;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div style="font-size:12px;font-weight:700;color:#EE4D2D;">Use the 3WH Fleet Mix example</div>
+          <div style="background:#EE4D2D;color:white;font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;">EXAMPLE</div>
+        </div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">No email in mind? Use the weekly %3WH Utilisation report. Sample data is already prepared — just download and follow along.</div>
+        <a href="https://drive.google.com/drive/folders/1Byr8vFMOorlBnZX4rJzgQNMzKsBEBCMs" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:6px 14px;border-radius:4px;text-decoration:none;">📂 Download sample files ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- What we're building -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;">
+    <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;border-top:3px solid #EE4D2D;padding:14px;text-align:center;">
+      <div style="font-size:20px;margin-bottom:6px;">🧠</div>
+      <div style="font-size:12px;font-weight:700;color:#1a2035;margin-bottom:3px;">Part A</div>
+      <div style="font-size:11px;color:#8a93a6;">Set up CLAUDE.md</div>
+    </div>
+    <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;border-top:3px solid #EE4D2D;padding:14px;text-align:center;">
+      <div style="font-size:20px;margin-bottom:6px;">📚</div>
+      <div style="font-size:12px;font-weight:700;color:#1a2035;margin-bottom:3px;">Part B</div>
+      <div style="font-size:11px;color:#8a93a6;">Build Knowledge Base</div>
+    </div>
+    <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;border-top:3px solid #EE4D2D;padding:14px;text-align:center;">
+      <div style="font-size:20px;margin-bottom:6px;">⚡</div>
+      <div style="font-size:12px;font-weight:700;color:#1a2035;margin-bottom:3px;">Part C</div>
+      <div style="font-size:11px;color:#8a93a6;">Create the Skill</div>
+    </div>
+    <div style="background:#EE4D2D;border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-size:20px;margin-bottom:6px;">🚀</div>
+      <div style="font-size:12px;font-weight:700;color:white;margin-bottom:3px;">Part D</div>
+      <div style="font-size:11px;color:#ffcfc4;">Run it</div>
+    </div>
+  </div>
+
+  <!-- ── PART A: CLAUDE.md ── -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+    <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;">PART A</div>
+    <div style="font-size:16px;font-weight:700;color:#1a2035;">Set up your CLAUDE.md</div>
+  </div>
+  <div class="callout-note" style="margin-bottom:16px;"><strong>Why first?</strong> CLAUDE.md is Cowork's briefing note. Setting it up before anything else means every prompt you write already has your SPX context loaded — no need to re-explain who you are every session.</div>
+
+  <div class="steps-list" style="margin-bottom:28px;">
+
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Create your task folder</div>
+        <div class="step-desc">On your computer, create a folder named after your email task and drop your data file inside it. Your folder should look like this:</div>
+        <!-- File explorer visual -->
+        <div style="margin-top:14px;background:#f7f8fc;border:1px solid #e4e8f0;border-radius:8px;overflow:hidden;font-size:13px;">
+          <!-- Explorer header -->
+          <div style="background:#e4e8f0;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#e03131;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#f5c518;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#2f9e44;"></div>
+            <div style="margin-left:8px;font-size:11px;color:#5a6478;">📁 my-weekly-email &nbsp;<span style="color:#aaa;">e.g. 3wh-fleet-mix, dispute-summary, hub-ops-update</span></div>
+          </div>
+          <!-- Files -->
+          <div style="padding:10px 0;">
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid #f0f2f5;">
+              <div style="font-size:16px;">📄</div>
+              <div>
+                <div style="font-weight:700;color:#1a2035;">CLAUDE.md</div>
+                <div style="font-size:11px;color:#8a93a6;">Cowork memory file — create this in Step 2</div>
+              </div>
+              <div style="margin-left:auto;background:#fff0ed;color:#EE4D2D;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">NEXT STEP</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid #f0f2f5;">
+              <div style="font-size:16px;">📊</div>
+              <div>
+                <div style="font-weight:700;color:#1a2035;">your_data_file.csv</div>
+                <div style="font-size:11px;color:#8a93a6;">Your source data — the spreadsheet or CSV you pull numbers from &nbsp;<span style="color:#EE4D2D;">e.g. fleet_mix_raw.csv</span></div>
+              </div>
+              <div style="margin-left:auto;background:#e8f5e9;color:#2f9e44;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">ADD NOW</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 16px;">
+              <div style="font-size:16px;">📁</div>
+              <div>
+                <div style="font-weight:700;color:#1a2035;">kb/</div>
+                <div style="font-size:11px;color:#8a93a6;">Knowledge base folder — you'll fill this in Part B</div>
+              </div>
+              <div style="margin-left:auto;background:#f0f2f5;color:#8a93a6;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">PART B</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Use Claude to create your CLAUDE.md</div>
+        <div class="step-desc">CLAUDE.md is for <strong>things that are always true about the task</strong> — the format, tone, recipients, and rules that apply every single time. We'll do this in 3 mini-steps: generate a draft → update your details → ask Claude to refine it.</div>
+        <div style="margin-top:12px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#EE4D2D;margin-bottom:10px;">What a good CLAUDE.md looks like — copy this as your template</div>
+
+          <!-- Template sections -->
+          <div style="display:flex;flex-direction:column;gap:10px;">
+
+            <div style="background:#1a2035;border-radius:6px;overflow:hidden;">
+              <div style="background:#EE4D2D;padding:6px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:0.5px;">1 — REPORT PURPOSE</div>
+              <div style="padding:12px 14px;font-family:monospace;font-size:12px;color:#c8d0e0;line-height:1.8;">
+                <span style="color:#79b8ff;">## Report Purpose</span><br>
+                <span style="color:#a0aec0;">[What this report is, how often it goes out, and what</span><br>
+                <span style="color:#a0aec0;">decision or action it supports]</span><br>
+                <span style="color:#636e82;font-size:11px;">e.g. Weekly fleet utilisation summary sent every Monday.</span><br>
+                <span style="color:#636e82;font-size:11px;">&nbsp;&nbsp;&nbsp;&nbsp;Flags hubs below the 85% 3WH threshold.</span>
+              </div>
+            </div>
+
+            <div style="background:#1a2035;border-radius:6px;overflow:hidden;">
+              <div style="background:#EE4D2D;padding:6px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:0.5px;">2 — DATA SOURCES</div>
+              <div style="padding:12px 14px;font-family:monospace;font-size:12px;color:#c8d0e0;line-height:1.8;">
+                <span style="color:#79b8ff;">## Data Sources</span><br>
+                <span style="color:#a0aec0;">- Primary: `[your_file.csv]` — uploaded each time</span><br>
+                <span style="color:#a0aec0;">- Key columns: [list what matters]</span><br>
+                <span style="color:#a0aec0;">- Period covered: [daily / weekly / monthly]</span><br>
+                <span style="color:#636e82;font-size:11px;">e.g. fleet_mix_raw.csv — hub_name, vehicle_type, utilisation_pct</span>
+              </div>
+            </div>
+
+            <div style="background:#1a2035;border-radius:6px;overflow:hidden;">
+              <div style="background:#EE4D2D;padding:6px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:0.5px;">3 — EMAIL STRUCTURE</div>
+              <div style="padding:12px 14px;font-family:monospace;font-size:12px;color:#c8d0e0;line-height:1.8;">
+                <span style="color:#79b8ff;">## Email Structure</span><br>
+                <span style="color:#a0aec0;">1. Subject line — [what it should include]</span><br>
+                <span style="color:#a0aec0;">2. Opening summary — [1–3 sentence overview]</span><br>
+                <span style="color:#a0aec0;">3. Key metrics — [table, bullets, or cards]</span><br>
+                <span style="color:#a0aec0;">4. Highlights / flags — [what to surface]</span><br>
+                <span style="color:#a0aec0;">5. Closing — [action items or next steps]</span>
+              </div>
+            </div>
+
+            <div style="background:#1a2035;border-radius:6px;overflow:hidden;">
+              <div style="background:#EE4D2D;padding:6px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:0.5px;">4 — RECIPIENTS</div>
+              <div style="padding:12px 14px;font-family:monospace;font-size:12px;color:#c8d0e0;line-height:1.8;">
+                <span style="color:#79b8ff;">## Recipients</span><br>
+                <span style="color:#a0aec0;">- To: [name / role / email]</span><br>
+                <span style="color:#a0aec0;">- CC: [optional]</span><br>
+                <span style="color:#a0aec0;">- Audience: [what they care about, how they read</span><br>
+                <span style="color:#a0aec0;">&nbsp;&nbsp;data — e.g. data-literate, prefers concise summaries]</span>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div style="background:#1a2035;border-radius:6px;overflow:hidden;">
+                <div style="background:#2f9e44;padding:6px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:0.5px;">5 — ALWAYS DO</div>
+                <div style="padding:12px 14px;font-family:monospace;font-size:12px;color:#c8d0e0;line-height:1.8;">
+                  <span style="color:#79b8ff;">## Always</span><br>
+                  <span style="color:#a0aec0;">- [Your quality rules]</span><br>
+                  <span style="color:#a0aec0;">- [What to flag or check]</span><br>
+                  <span style="color:#636e82;font-size:11px;">e.g. Flag if any hub data is missing</span>
+                </div>
+              </div>
+              <div style="background:#1a2035;border-radius:6px;overflow:hidden;">
+                <div style="background:#e03131;padding:6px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:0.5px;">6 — NEVER DO</div>
+                <div style="padding:12px 14px;font-family:monospace;font-size:12px;color:#c8d0e0;line-height:1.8;">
+                  <span style="color:#79b8ff;">## Never</span><br>
+                  <span style="color:#a0aec0;">- Guess or fill in missing data</span><br>
+                  <span style="color:#a0aec0;">- Change the recipient list</span><br>
+                  <span style="color:#a0aec0;">- [Any rules specific to your team]</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Step 2a -->
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#EE4D2D;color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;">STEP 2A — GENERATE DRAFT</div>
+        </div>
+        <div class="step-prompt">
+          <strong>Ask Claude to create a first draft</strong>
+          <div style="margin-top:8px;font-style:normal;line-height:1.8;font-size:13px;color:#1a2035;">
+            "Using the CLAUDE.md template structure above, create a first draft CLAUDE.md file in my current folder for my [describe your email — e.g. weekly fleet mix report / daily ops summary / hub dispute report]. Use sensible defaults — I'll review and update the details next."
+          </div>
+        </div>
+
+        <!-- Step 2b -->
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#EE4D2D;color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;">STEP 2B — PERSONALISE</div>
+        </div>
+        <div style="background:#f7f8fc;border:1px solid #e4e8f0;border-radius:6px;padding:14px 16px;font-size:13px;color:#3a4257;line-height:1.8;">
+          Open the CLAUDE.md file Claude just created and update these fields with your real details:
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:#EE4D2D;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;flex-shrink:0;margin-top:2px;">MUST UPDATE</div>
+              <div><strong>Recipients</strong> — replace with your actual team email and manager's email</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:#EE4D2D;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;flex-shrink:0;margin-top:2px;">MUST UPDATE</div>
+              <div><strong>Report Purpose</strong> — describe what decisions your email actually supports</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:#f08c00;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;flex-shrink:0;margin-top:2px;">OPTIONAL</div>
+              <div><strong>Tone & Style</strong> — adjust if your team has specific preferences</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:#f08c00;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;flex-shrink:0;margin-top:2px;">OPTIONAL</div>
+              <div><strong>Never section</strong> — add anything specific to your team's rules</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2c -->
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#EE4D2D;color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;">STEP 2C — REFINE WITH CLAUDE</div>
+        </div>
+        <div class="step-prompt">
+          <strong>Ask Claude to refine based on your updates</strong>
+          <div style="margin-top:8px;font-style:normal;line-height:1.8;font-size:13px;color:#1a2035;">
+            "I've updated the CLAUDE.md with my real recipient list and report purpose. Re-read the file and refine it — make sure the tone, rules, and email structure are consistent with the recipients and purpose I've described. Save the updated version."
+          </div>
+        </div>
+        <div class="callout-note" style="margin-top:12px;margin-bottom:0;">💡 This draft → personalise → refine loop is how you should set up any new task in Cowork. Claude does the heavy lifting; you just correct the details it couldn't know.</div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- ── PART B: Knowledge Base ── -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+    <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;">PART B</div>
+    <div style="font-size:16px;font-weight:700;color:#1a2035;">Build your Knowledge Base</div>
+  </div>
+  <div class="callout-note" style="margin-bottom:16px;"><strong>Why a KB?</strong> The KB gives Cowork the detail it needs to write accurate, context-aware emails — vehicle specs, past email examples, or your SOP for what "good utilisation" means.</div>
+
+  <!-- Style explainer box -->
+  <div style="background:#fff8e1;border:1px solid #f5c518;border-left:4px solid #EE4D2D;border-radius:6px;padding:16px 18px;margin-bottom:20px;">
+    <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:10px;">🎨 Where does email style live?</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+      <div style="background:white;border-radius:5px;padding:12px;border-top:3px solid #EE4D2D;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#EE4D2D;margin-bottom:6px;">CLAUDE.md</div>
+        <div style="font-size:12px;color:#1a2035;font-weight:600;margin-bottom:4px;">Style rules in plain English</div>
+        <div style="font-size:11px;color:#5a6478;line-height:1.5;">Things always true about the format — colours, row logic, section order, tone. Write it once, applies every week automatically.</div>
+        <div style="margin-top:8px;font-size:11px;color:#8a93a6;font-style:italic;">e.g. "Use orange header, dark navy insight panel, colour rows red/amber/green"</div>
+      </div>
+      <div style="background:white;border-radius:5px;padding:12px;border-top:3px solid #1a2035;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#1a2035;margin-bottom:6px;">Knowledge Base</div>
+        <div style="font-size:12px;color:#1a2035;font-weight:600;margin-bottom:4px;">A real email to copy</div>
+        <div style="font-size:11px;color:#5a6478;line-height:1.5;">Drop a past email into the kb/ folder as a reference. Claude looks it up when generating to match the exact structure.</div>
+        <div style="margin-top:8px;font-size:11px;color:#8a93a6;font-style:italic;">e.g. <code style="background:#f0f2f5;padding:1px 4px;border-radius:2px;">email_style_guide.md</code> extracted from your best email</div>
+      </div>
+      <div style="background:white;border-radius:5px;padding:12px;border-top:3px solid #8a93a6;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#8a93a6;margin-bottom:6px;">Skill</div>
+        <div style="font-size:12px;color:#1a2035;font-weight:600;margin-bottom:4px;">Just the trigger</div>
+        <div style="font-size:11px;color:#5a6478;line-height:1.5;">The skill calls both CLAUDE.md and the KB — but it doesn't store the style itself. Think of it as the "run" button.</div>
+        <div style="margin-top:8px;font-size:11px;color:#8a93a6;font-style:italic;">e.g. "Generate fleet mix email" → triggers everything</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps-list" style="margin-bottom:28px;">
+
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Create a kb/ folder and add your documents</div>
+        <div class="step-desc">Inside your task folder, create a <code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;">kb/</code> subfolder. Add any documents that help Cowork understand the task — targets, definitions, SOPs, or a past email to reference.</div>
+        <div class="folder-tree" style="margin-top:10px;font-size:12px;line-height:2;">
+<span class="folder">📁 my-weekly-email/</span>
+├── <span class="file-md">CLAUDE.md</span>
+├── your_data_file.csv
+└── <span class="folder">📁 kb/</span>
+    ├── targets_or_thresholds.xlsx    <span class="comment">← what good looks like</span>
+    ├── definitions_or_sop.pdf        <span class="comment">← context Claude needs to know</span>
+    └── <span class="file-md">email_style_guide.md</span>       <span class="comment">← layout, tone, format rules</span>
+        </div>
+        <div style="background:#ecfdf5;border:1px solid #9ae6b4;border-radius:5px;padding:10px 14px;margin-top:10px;font-size:12px;color:#276749;">
+          <strong>💡 Style tip:</strong> Instead of saving a raw email file, write a <code style="background:rgba(0,0,0,0.06);padding:1px 4px;border-radius:2px;">email_style_guide.md</code> — plain English describing your layout, colours, and tone. Claude reads it easily and you can share it with teammates so everyone's email looks the same.
+        </div>
+        <div style="background:#f0f4ff;border:1px solid #c7d4f5;border-radius:5px;padding:10px 14px;margin-top:8px;font-size:12px;color:#3a4a8a;">
+          <strong>Using the 3WH example?</strong> Download <code style="background:rgba(0,0,0,0.06);padding:1px 4px;border-radius:2px;">fleet_mix_raw.csv</code> + <code style="background:rgba(0,0,0,0.06);padding:1px 4px;border-radius:2px;">3wh_utilisation_targets.xlsx</code> from the <a href="https://drive.google.com/drive/folders/1Byr8vFMOorlBnZX4rJzgQNMzKsBEBCMs" target="_blank" style="color:#EE4D2D;font-weight:600;">sample files folder ↗</a> and drop them into your task folder and kb/.
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Test that Cowork can use the KB</div>
+        <div class="step-desc">Before building the skill, verify Cowork can find and use your documents by asking a question it would need to search the KB to answer.</div>
+        <div class="step-prompt">
+          <strong>Try this prompt</strong>
+          "Based on the documents in my kb/ folder, what is the target 3WH utilisation rate and how does it compare to what's in fleet_mix_raw.csv this week?"
+        </div>
+        <div class="callout-warning" style="margin-top:10px;margin-bottom:0;">If the answer seems off, check that your kb/ folder is inside the folder Cowork has access to.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Gmail connector reminder -->
+  <div style="background:#fff3e0;border:1px solid #ffcc80;border-left:4px solid #f08c00;border-radius:6px;padding:14px 18px;margin-bottom:24px;">
+    <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:8px;">⚠️ Before Part C — connect your Gmail</div>
+    <div style="font-size:12px;color:#5a6478;line-height:1.6;">The skill saves drafts to Gmail. For this to work, Cowork needs permission to access your email. If you haven't done this yet, connect it now before building the skill.</div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div style="font-size:12px;font-weight:600;color:#1a2035;">How to connect:</div>
+      <div style="font-size:12px;color:#5a6478;">Cowork sidebar → <strong>Connectors</strong> → <strong>Gmail</strong> → Connect → sign in with your Shopee Google account</div>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:#8a93a6;font-style:italic;">You only need to do this once — Cowork will remember it for all future sessions.</div>
+  </div>
+
+  <!-- ── PART C: Skill ── -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+    <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;">PART C</div>
+    <div style="font-size:16px;font-weight:700;color:#1a2035;">Create the Skill</div>
+  </div>
+  <div class="callout-note" style="margin-bottom:16px;"><strong>Why a skill?</strong> Instead of typing a long prompt every Monday, you'll have a saved skill you can trigger in seconds — and share with your team so everyone uses it the same way.</div>
+
+  <div class="steps-list" style="margin-bottom:28px;">
+
+    <div class="step-card">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Ask Cowork to create the skill</div>
+        <div class="step-desc">You don't need to write the skill file yourself. Just describe what you want the skill to do and Cowork will create the file for you.</div>
+        <div class="step-prompt">
+          <strong>Try this prompt</strong>
+          "Create a skill called '[your-email-name]'. When triggered, it should: read [your_data_file.csv], check the kb/ folder for any reference documents, generate the email using the format and rules in my CLAUDE.md, and save a draft in Gmail ready for me to review and send."
+          <div style="margin-top:8px;font-size:11px;color:#8a93a6;font-style:italic;">3WH example: "Create a skill called 'fleet-mix-email'. When triggered, read fleet_mix_raw.csv, check kb/ for utilisation targets, generate the weekly %3WH email using my CLAUDE.md format, and save a Gmail draft."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <div class="step-title">Review the skill file Cowork created</div>
+        <div class="step-desc">Cowork will save the skill as a .md file in your skills folder. Open it and read through it — make sure the instructions match what you want. Edit any part you want to change.</div>
+        <div class="callout-note" style="margin-top:10px;margin-bottom:0;">💡 The skill file is just a markdown file. You can open it in Notepad and edit it like any other text file.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── PART D: Run it ── -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+    <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;">PART D</div>
+    <div style="font-size:16px;font-weight:700;color:#1a2035;">Run it</div>
+  </div>
+
+  <div class="steps-list" style="margin-bottom:24px;">
+
+    <div class="step-card">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <div class="step-title">Trigger your skill</div>
+        <div class="step-desc">Now test everything you've built. Open Cowork with your task folder selected and trigger the skill.</div>
+        <div class="step-prompt">
+          <strong>Try this prompt</strong>
+          "Generate [your email name]"
+          <div style="margin-top:6px;font-size:11px;color:#8a93a6;font-style:italic;">3WH example: "Generate fleet mix email"</div>
+        </div>
+        <div class="step-desc" style="margin-top:10px;">Cowork will read your data file, check your KB for context, and draft the email in the format you defined — using the rules from your CLAUDE.md throughout.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">8</div>
+      <div class="step-body">
+        <div class="step-title">Review, refine, and confirm</div>
+        <div class="step-desc">Read the draft email Cowork produced. If anything is off, tell it what to change in plain English. Once it's right, ask Cowork to save it as a Gmail draft.</div>
+        <div class="step-prompt">
+          <strong>Example refinement prompts</strong>
+          <div style="margin-top:6px;font-style:normal;line-height:2;font-size:12px;">
+            "Make the subject line shorter"<br>
+            "Add a line flagging that Hub B is below target"<br>
+            "Save this as a Gmail draft to ops-team@spx.com"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card" style="border-left:3px solid #EE4D2D;">
+      <div class="step-num">9</div>
+      <div class="step-body">
+        <div class="step-title">Ask Claude to remember the changes</div>
+        <div class="step-desc">After any refinement, always close the loop — ask Claude to update your CLAUDE.md so the same fix applies automatically next week. This is how your automation gets better over time without extra effort.</div>
+        <div class="step-prompt">
+          <strong>Use this after every meaningful edit</strong>
+          <div style="margin-top:8px;font-style:normal;line-height:1.8;font-size:13px;color:#1a2035;">
+            "I've made some changes to this email. Please update my CLAUDE.md to reflect what I changed — so the next time you generate this email, these preferences are already applied."
+          </div>
+        </div>
+        <div style="margin-top:12px;background:#f7f8fc;border:1px solid #e4e8f0;border-radius:6px;padding:12px 14px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#5a6478;margin-bottom:8px;">What gets saved — examples</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;">
+            <div style="display:flex;gap:10px;">
+              <div style="color:#EE4D2D;font-weight:700;flex-shrink:0;">You said:</div>
+              <div style="color:#3a4257;">"Always bold the WoW delta column"</div>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <div style="color:#2f9e44;font-weight:700;flex-shrink:0;">Saved to CLAUDE.md:</div>
+              <div style="color:#3a4257;font-family:monospace;font-size:11px;background:#f0f2f5;padding:2px 6px;border-radius:3px;">Always bold the week-on-week delta column in the metrics table.</div>
+            </div>
+            <div style="margin-top:4px;display:flex;gap:10px;">
+              <div style="color:#EE4D2D;font-weight:700;flex-shrink:0;">You said:</div>
+              <div style="color:#3a4257;">"Don't include hubs with less than 10 deliveries"</div>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <div style="color:#2f9e44;font-weight:700;flex-shrink:0;">Saved to CLAUDE.md:</div>
+              <div style="color:#3a4257;font-family:monospace;font-size:11px;background:#f0f2f5;padding:2px 6px;border-radius:3px;">Exclude hubs with fewer than 10 deliveries from the report.</div>
+            </div>
+          </div>
+        </div>
+        <div class="callout-note" style="margin-top:10px;margin-bottom:0;">💡 Think of this as training your assistant. Each time you catch something and save it, you're building a smarter starting point for next week — and every week after.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="insights-card">
+    <div class="insights-title">💡 Tips for getting better results</div>
+    <div class="insight-item">
+      <span class="insight-icon">🧠</span>
+      <span><strong>Your CLAUDE.md is the multiplier.</strong> The more context you put in it — abbreviations, what your team cares about, what "good" looks like — the better every output will be, not just this email.</span>
+    </div>
+    <div class="insight-item">
+      <span class="insight-icon">📄</span>
+      <span><strong>Add a style guide to the KB.</strong> Drop a past email (or write a plain-text description of your format) into kb/ as a reference. Cowork will match the tone, structure, and level of detail automatically — and you can share it with teammates.</span>
+    </div>
+    <div class="insight-item">
+      <span class="insight-icon">⚡</span>
+      <span><strong>Every edit is a lesson.</strong> When you catch something wrong — wrong tone, missing section, wrong number format — don't just fix it once. Tell Claude to save it to CLAUDE.md so it never happens again.</span>
+    </div>
+    <div class="insight-item">
+      <span class="insight-icon">🔄</span>
+      <span><strong>Skills are shareable.</strong> Once your email skill is working well, share the skill file with your team. They can install it and generate the same email from their own data.</span>
+    </div>
+  </div>
+
+  <!-- ── GOING FURTHER: GSheet / SMART connector ── -->
+  <div style="margin-top:32px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <div style="width:4px;height:24px;background:#EE4D2D;border-radius:2px;flex-shrink:0;"></div>
+      <div style="font-size:16px;font-weight:700;color:#1a2035;">Going further — read data directly from Google Sheets</div>
+    </div>
+    <div style="font-size:13px;color:#5a6478;line-height:1.7;margin-bottom:16px;">Right now, the workflow requires you to download your data as a CSV and upload it manually each week. Once you're comfortable, you can skip that step entirely — and have Cowork pull the latest data from your Google Sheet automatically.</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+
+      <div style="background:white;border:1px solid #e4e8f0;border-radius:8px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <div style="font-size:18px;">🚫</div>
+          <div style="font-size:13px;font-weight:700;color:#1a2035;">Google Drive connector — not available at SPX</div>
+        </div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">Anthropic offers a native Google Drive MCP connector, but SPX IT policy blocks it. You won't be able to install it via the standard Cowork connector marketplace.</div>
+      </div>
+
+      <div style="background:#fff8f6;border:2px solid #EE4D2D;border-radius:8px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <div style="font-size:18px;">✅</div>
+          <div style="font-size:13px;font-weight:700;color:#EE4D2D;">Workaround — use SMART MCP</div>
+        </div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">SMART is Shopee's internal data platform and has an MCP connector that lets Claude read your GSheets directly. It's approved for Shopee use.</div>
+        <div style="margin-top:8px;background:#fff3e0;border-radius:4px;padding:8px 10px;font-size:11px;color:#b45309;">
+          <strong>⚠️ Note:</strong> SMART MCP is currently only available via <strong>Claude Code</strong>, not Cowork. This step is for when you're ready to level up beyond the workshop.
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#1a2035;border-radius:8px;overflow:hidden;">
+      <div style="background:#EE4D2D;padding:10px 16px;font-size:12px;font-weight:700;color:white;letter-spacing:0.5px;">HOW TO CONNECT SMART MCP</div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
+          <div style="font-size:12px;color:#c8d0e0;line-height:1.6;">Go to the SMART Open Platform and navigate to the MCP Server tab:<br>
+            <a href="https://smart.shopee.io/open-platform?tab=mcp-server" target="_blank" style="color:#79b8ff;font-family:monospace;font-size:12px;">https://smart.shopee.io/open-platform?tab=mcp-server</a>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
+          <div style="font-size:12px;color:#c8d0e0;line-height:1.6;">Generate your MCP credentials and copy the config snippet provided.</div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
+          <div style="font-size:12px;color:#c8d0e0;line-height:1.6;">Add the config to your Claude Code <span style="font-family:monospace;background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;">claude_desktop_config.json</span> under <span style="font-family:monospace;background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;">mcpServers</span>.</div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
+          <div style="font-size:12px;color:#c8d0e0;line-height:1.6;">Restart Claude Code. You can now ask Claude to read your Google Sheet directly — no more manual CSV downloads.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Internal workshop use only · Not an official Anthropic document</div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 3 — EXERCISE 2: BUILD A WEBPAGE
+══════════════════════════════════════════ -->
+<div id="panel-ex2" class="main-panel">
+<div class="container">
+
+  <div class="exercise-hero">
+    <div class="exercise-num">02</div>
+    <div>
+      <div class="exercise-title">Build a Webpage / Dashboard</div>
+      <div class="exercise-desc">Turn your data into a working visual dashboard — no design skills, no coding, no deployment needed.</div>
+      <div class="exercise-goal"><strong>Goal:</strong> Walk away with a live HTML dashboard built from your own data that you can open in any browser and share with your team.</div>
+    </div>
+  </div>
+
+  <!-- ── CONCEPT: What makes a webpage ── -->
+  <div style="margin-bottom:28px;">
+    <div style="font-size:15px;font-weight:700;color:#1a2035;margin-bottom:4px;">What actually goes into a webpage?</div>
+    <div style="font-size:13px;color:#5a6478;margin-bottom:16px;">Before we build, here's what every webpage is made of — and what Claude collapses for you.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+
+      <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;border-top:3px solid #EE4D2D;padding:16px;">
+        <div style="font-size:22px;margin-bottom:8px;">🏗️</div>
+        <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:6px;">HTML</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;margin-bottom:8px;">The skeleton. Defines what's on the page — headings, tables, buttons, cards. Like drawing boxes on a blueprint.</div>
+        <div style="font-size:11px;background:#f0f2f5;padding:5px 8px;border-radius:4px;font-family:monospace;color:#3a4257;">&lt;table&gt; &lt;div&gt; &lt;h1&gt;</div>
+      </div>
+
+      <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;border-top:3px solid #1a2035;padding:16px;">
+        <div style="font-size:22px;margin-bottom:8px;">🎨</div>
+        <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:6px;">CSS</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;margin-bottom:8px;">The styling. Controls colours, fonts, spacing, layout. Like painting and decorating the blueprint.</div>
+        <div style="font-size:11px;background:#f0f2f5;padding:5px 8px;border-radius:4px;font-family:monospace;color:#3a4257;">color: #EE4D2D; font-size: 14px</div>
+      </div>
+
+      <div style="background:white;border-radius:8px;border:1px solid #e4e8f0;border-top:3px solid #2f9e44;padding:16px;">
+        <div style="font-size:22px;margin-bottom:8px;">⚙️</div>
+        <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:6px;">JavaScript (JS)</div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;margin-bottom:8px;">The logic. Sorts tables, filters data, calculates totals, shows/hides tabs. Everything interactive and dynamic.</div>
+        <div style="font-size:11px;background:#f0f2f5;padding:5px 8px;border-radius:4px;font-family:monospace;color:#3a4257;">sort(), filter(), calculate()</div>
+      </div>
+
+    </div>
+
+    <!-- The "one file" insight -->
+    <div style="background:#1a2035;border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+      <div style="font-size:28px;flex-shrink:0;">💡</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Claude puts HTML + CSS + JS into a single .html file</div>
+        <div style="font-size:12px;color:#a0aec0;line-height:1.6;">You don't need to manage three separate files. Everything lives in one document — open it in any browser, share it by email, no installation required. This is the "magic" of what Claude builds.</div>
+      </div>
+    </div>
+
+    <!-- The 3 things you need grid -->
+    <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:10px;">The 3 things you need to build a webpage with Claude</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px;">
+
+      <div style="background:#fff8f6;border:1px solid #ffd5cc;border-radius:7px;padding:14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#EE4D2D;color:white;font-size:11px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+          <div style="font-size:13px;font-weight:700;color:#1a2035;">The HTML file</div>
+        </div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">Claude creates this for you. It contains the structure, design, and all the logic. You just describe what you want — Claude writes the code.</div>
+      </div>
+
+      <div style="background:#f0f4ff;border:1px solid #c7d4f5;border-radius:7px;padding:14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#1a2035;color:white;font-size:11px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+          <div style="font-size:13px;font-weight:700;color:#1a2035;">Your data <span style="font-size:10px;font-weight:400;color:#8a93a6;">(if any)</span></div>
+        </div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">A CSV, Excel file, or even numbers copy-pasted from a spreadsheet. Claude reads it and builds the visuals around it.</div>
+      </div>
+
+      <div style="background:#f4fff7;border:1px solid #b2e4c0;border-radius:7px;padding:14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#2f9e44;color:white;font-size:11px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+          <div style="font-size:13px;font-weight:700;color:#1a2035;">Hosting <span style="font-size:10px;font-weight:400;color:#8a93a6;">(optional)</span></div>
+        </div>
+        <div style="font-size:12px;color:#5a6478;line-height:1.6;">For sharing via a URL. Not always needed — you can email the file directly and anyone can open it. If you want a link, options below.</div>
+      </div>
+
+    </div>
+
+    <!-- Hosting options -->
+    <div style="background:#f7f8fc;border:1px solid #e4e8f0;border-radius:6px;padding:12px 16px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#5a6478;margin-bottom:10px;">Hosting options — get a shareable link</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+
+        <div style="background:white;border:1px solid #e4e8f0;border-radius:6px;padding:12px;">
+          <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:4px;">🐙 GitHub Pages</div>
+          <div style="font-size:11px;color:#5a6478;line-height:1.5;margin-bottom:6px;">Push .html to a repo, enable Pages. Free public URL.</div>
+          <div style="font-size:10px;background:#fff0ed;color:#EE4D2D;padding:2px 8px;border-radius:10px;display:inline-block;font-weight:600;">Used for this site</div>
+        </div>
+
+        <div style="background:white;border:1px solid #e4e8f0;border-radius:6px;padding:12px;">
+          <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:4px;">📝 Google Apps Script</div>
+          <div style="font-size:11px;color:#5a6478;line-height:1.5;margin-bottom:6px;">Publish a web app inside Google Workspace. Can read live Sheets data. Shopee Google account works.</div>
+          <div style="font-size:10px;background:#e8f0fe;color:#1a5276;padding:2px 8px;border-radius:10px;display:inline-block;font-weight:600;">Free · SPX-friendly</div>
+        </div>
+
+        <div style="background:white;border:1px solid #e4e8f0;border-radius:6px;padding:12px;">
+          <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:4px;">🔴 Streamlit</div>
+          <div style="font-size:11px;color:#5a6478;line-height:1.5;margin-bottom:6px;">Claude writes a Python app; deploy to Streamlit Community Cloud for a free interactive URL. Good for complex data logic.</div>
+          <div style="font-size:10px;background:#f5f0ff;color:#6b21a8;padding:2px 8px;border-radius:10px;display:inline-block;font-weight:600;">Free tier</div>
+        </div>
+
+        <div style="background:white;border:1px solid #e4e8f0;border-radius:6px;padding:12px;">
+          <div style="font-size:13px;font-weight:700;color:#1a2035;margin-bottom:4px;">▲ Netlify / Vercel</div>
+          <div style="font-size:11px;color:#5a6478;line-height:1.5;margin-bottom:6px;">Drag and drop .html at netlify.com. Instant public URL in seconds.</div>
+          <div style="font-size:10px;background:#f0f2f5;color:#5a6478;padding:2px 8px;border-radius:10px;display:inline-block;font-weight:600;">Free tier · Quickest</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EXERCISE STEPS ── -->
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+    <div style="width:4px;height:24px;background:#EE4D2D;border-radius:2px;flex-shrink:0;"></div>
+    <div style="font-size:15px;font-weight:700;color:#1a2035;">Now build your own — step by step</div>
+  </div>
+
+  <div class="steps-list">
+
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Pick your data</div>
+        <div class="step-desc">Choose any data you actually use at work — a performance report, a tracker, a hub summary, dispute logs. Export it as a CSV or drop in the Excel file. Even copy-pasting a table from a chat message works.</div>
+        <div style="margin-top:10px;background:#f0f4ff;border:1px solid #c7d4f5;border-radius:5px;padding:10px 14px;font-size:12px;color:#3a4a8a;">
+          <strong>No data? Use this:</strong> Download <code style="background:rgba(0,0,0,0.06);padding:1px 4px;border-radius:2px;">fleet_mix_raw.csv</code> from the <a href="https://drive.google.com/drive/folders/1Byr8vFMOorlBnZX4rJzgQNMzKsBEBCMs" target="_blank" style="color:#EE4D2D;font-weight:600;">sample files folder ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Describe what you want to see</div>
+        <div class="step-desc">Grant Cowork access to your folder, then tell it what the dashboard should show. Mention: what KPIs matter, whether you want a table, what you'd flag in red, any groupings or tabs you want.</div>
+        <div class="step-prompt">
+          <strong>Starter prompt template</strong>
+          <div style="margin-top:8px;font-style:normal;line-height:1.8;font-size:13px;color:#1a2035;">
+            "Read [your_file.csv] and build me an HTML dashboard. I want:<br>
+            — [X] KPI cards at the top showing [metrics]<br>
+            — A table with [columns you care about], sortable by [column]<br>
+            — Highlight rows in red where [condition]<br>
+            — Use dark navy (#1a2035) and orange (#EE4D2D) as the colours"
+          </div>
+        </div>
+        <div class="callout-note" style="margin-top:10px;margin-bottom:0;">💡 The more specific you are upfront, the less back-and-forth you'll need. But don't overthink it — even a rough description gets you 80% there on the first try.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Open the file and review it</div>
+        <div class="step-desc">Cowork saves the .html file to your folder. Find it, double-click to open in Chrome or Edge — it loads immediately, no setup needed. Look at it like a user would: does it show the right numbers? Is anything missing or confusing?</div>
+        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+          <div style="background:#ecfdf5;border:1px solid #9ae6b4;border-radius:4px;padding:6px 12px;font-size:11px;color:#276749;font-weight:600;">✓ Numbers correct?</div>
+          <div style="background:#ecfdf5;border:1px solid #9ae6b4;border-radius:4px;padding:6px 12px;font-size:11px;color:#276749;font-weight:600;">✓ Layout makes sense?</div>
+          <div style="background:#ecfdf5;border:1px solid #9ae6b4;border-radius:4px;padding:6px 12px;font-size:11px;color:#276749;font-weight:600;">✓ Would your manager understand it?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Refine with plain English</div>
+        <div class="step-desc">Tell Cowork what to change — you never need to touch the code. Be specific about what's wrong and what you'd prefer instead.</div>
+        <div class="step-prompt">
+          <strong>Example refinement prompts</strong>
+          <div style="margin-top:6px;font-style:normal;line-height:2;font-size:12px;">
+            "Move the KPI cards to the top and make the numbers bigger"<br>
+            "Add a tab for each region so I can switch between them"<br>
+            "Highlight any row where utilisation is above 80% in amber"<br>
+            "Add a summary row at the bottom showing totals"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Share it</div>
+        <div class="step-desc">Once it looks right, share the file with your team. Pick the option that fits your use case:</div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px;font-size:12px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="background:#fff0ed;color:#EE4D2D;font-weight:700;padding:2px 8px;border-radius:3px;font-size:11px;flex-shrink:0;margin-top:1px;">GITHUB</div>
+            <div><strong>GitHub Pages</strong> — push to a repo, enable Pages. Free public URL. How this workshop site is hosted.</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="background:#e8f0fe;color:#1a5276;font-weight:700;padding:2px 8px;border-radius:3px;font-size:11px;flex-shrink:0;margin-top:1px;">GOOGLE</div>
+            <div><strong>Google Apps Script</strong> — host inside Google Workspace, reads live Sheets data. Shopee Google account works.</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="background:#f5f0ff;color:#6b21a8;font-weight:700;padding:2px 8px;border-radius:3px;font-size:11px;flex-shrink:0;margin-top:1px;">STREAMLIT</div>
+            <div><strong>Streamlit</strong> — ask Claude to write a Python app instead of HTML, then deploy to Streamlit Community Cloud for a free URL.</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="background:#f0f2f5;color:#5a6478;font-weight:700;padding:2px 8px;border-radius:3px;font-size:11px;flex-shrink:0;margin-top:1px;">NETLIFY</div>
+            <div><strong>Netlify / Vercel</strong> — drag and drop at netlify.com. Instant URL, no account needed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="insights-card">
+    <div class="insights-title">💡 Tips for getting better results</div>
+    <div class="insight-item">
+      <span class="insight-icon">📐</span>
+      <span><strong>Start simple, layer in complexity.</strong> Ask for the basic table first, confirm the numbers are right, then add filters, sorting, and charts. Each iteration is faster than the last.</span>
+    </div>
+    <div class="insight-item">
+      <span class="insight-icon">🎨</span>
+      <span><strong>Reference an existing page.</strong> If you want it to look like another dashboard, take a screenshot and say "match this style." Claude can extract and replicate visual patterns.</span>
+    </div>
+    <div class="insight-item">
+      <span class="insight-icon">♻️</span>
+      <span><strong>Updating data is easy.</strong> When your numbers change, say "Update the dashboard with the new CSV I've dropped in the folder." Claude rewrites the data while keeping your layout.</span>
+    </div>
+    <div class="insight-item">
+      <span class="insight-icon">🔁</span>
+      <span><strong>Combine with Exercise 1.</strong> After generating your email, ask Claude to also produce an HTML summary dashboard from the same data. Two outputs, one prompt.</span>
+    </div>
+  </div>
+
+  <div class="footer">Internal workshop use only · Not an official Anthropic document</div>
+</div>
+</div>
+
+
+
+
+<script>
+  // ── MAIN TAB SWITCHING ──
+  function switchMain(name, btn) {
+    document.querySelectorAll('.main-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── SUB-TAB SWITCHING ──
+  function switchSub(name, btn) {
+    const parent = btn.closest('.main-panel');
+    parent.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    btn.closest('.sub-nav').querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── SLIDE DECK ──
+  let currentSlide = 1;
+  const totalSlides = 5;
+
+  function goSlide(n) {
+    document.getElementById('slide-' + currentSlide).classList.remove('active');
+    document.querySelectorAll('.slide-dot')[currentSlide - 1].classList.remove('active');
+    currentSlide = n;
+    document.getElementById('slide-' + currentSlide).classList.add('active');
+    document.querySelectorAll('.slide-dot')[currentSlide - 1].classList.add('active');
+    document.getElementById('slide-prev').disabled = currentSlide === 1;
+    document.getElementById('slide-next').disabled = currentSlide === totalSlides;
+  }
+
+  function changeSlide(dir) {
+    const next = currentSlide + dir;
+    if (next >= 1 && next <= totalSlides) goSlide(next);
+  }
+
+  // ── CONCEPT ACCORDION (kept for compatibility) ──
+  function toggleConcept(id) {
+    const card = document.getElementById(id);
+    if (card) card.classList.toggle('open');
+  }
+
+  // ── CHECKLIST TOGGLE ──
+  function toggleCheck(item) {
+    item.classList.toggle('checked');
+    if (item.classList.contains('checked')) {
+      item.querySelector('.check-box').innerHTML = '✓';
+    } else {
+      item.querySelector('.check-box').innerHTML = '';
+    }
+  }
+</script>
 </body>
 </html>
